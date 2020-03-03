@@ -1,0 +1,63 @@
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+
+  <div class="cross-validation"
+       [class.cross-validation-error]="checkoutForm.errors?.identityRevealed && (checkoutForm.touched || checkoutForm.dirty)">
+
+    <div class="form-group">
+      <label for="nome">
+        Nome
+      </label>
+      <input class="form-control form-control-sm" id="nome" type="text" formControlName="nome" required>
+    </div>
+    <div class="form-group">
+      <label for="cpf">
+        CPF
+      </label>
+      <input class="form-control form-control-sm" id="cpf" type="text" formControlName="cpf" required>
+    </div>
+    <div class="form-group">
+      <label for="nascimento">
+        Data de Nascimento
+      </label>
+      <input class="form-control form-control-sm" id="nascimento" type="date" formControlName="nascimento"
+             required>
+    </div>
+    <div class="form-group">
+      <label for="email">
+        E-Mail
+      </label>
+      <input class="form-control form-control-sm" id="email" type="text" formControlName="email" required>
+    </div>
+    <div class="form-group">
+      <label for="telefone">
+        Telefone
+      </label>
+      <input class="form-control form-control-sm" id="telefone" type="text" formControlName="telefone" required>
+    </div>
+    <div class="form-group">
+      <label for="estado">
+        Estado
+      </label>
+      <select class="form-control" id="estado" (change)="selecionarCidades($event)" required>
+        <option>Selecionar o Estado</option>
+        <option *ngFor="let estado of estados" [value]="estado.codEstado"
+                [label]="estado.uf"></option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="cidade">
+        Cidade
+      </label>
+      <select class="form-control" id="cidade" required>
+        <option *ngFor="let cidade of cidades" [value]="cidade.cod_cidade"
+                [label]="cidade.nome_cidade"></option>
+      </select>
+    </div>
+
+    <p class="text-right">
+      <button class="btn btn-primary" type="button" (click)="back()">Voltar</button> &nbsp;
+      <button class="btn btn-success" type="submit" [disabled]="!checkoutForm.valid">Salvar</button>
+    </p>
+  </div>
+</form>
